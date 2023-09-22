@@ -6,6 +6,10 @@ import android.os.Bundle
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.avengers_layout)
+        setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, FragmentMoviesList())
+            .commit()
     }
 }
