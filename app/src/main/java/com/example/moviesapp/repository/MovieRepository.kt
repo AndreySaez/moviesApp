@@ -1,19 +1,38 @@
 package com.example.moviesapp.repository
 
 import com.example.moviesapp.model.Movie
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MovieRepository {
+    private val movieApi = RetrofitProvider.api
 
-    fun getMovie() = Movie(
-        title = "Avengers: Endgame последние нормальные",
-        storyLine = """After the devastating events of Avengers: Infinity War, the universe is in ruins. 
-            |With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\\' 
-            |actions and restore balance to the universe. Ыыыфаызфоазо ап ызщвоп джлиедп удмлжц мкужмукж кжу 
-            |м уклмд кту кдулжмт к
-            | улдмткуж мц мкуджмктудждж цумку отмцдж ажфо мцакждомт цдмт кжЫыыфаызфоазо ап ызщвоп джлиедп удмлжц мкужмукж кжу 
-            |м уклмд кту кдулжмт к
-            | улдмткуж мц мкуджмктудждж цумку отмцдж ажфо мцакждомт цдмт кжЫыыфаызфоазо ап ызщвоп джлиедп удмлжц мкужмукж кжу 
-            |м уклмд кту кдулжмт к
-            | улдмткуж мц мкуджмктудждж цумку отмцдж ажфо мцакждомт цдмт кж""".trimMargin()
-    )
+    fun getMovie(movieRequest: String, onSuccess: (Movie) -> Unit) {
+        val callback = object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+                val responseString = response.body()?.string()
+                val jsonObject = responseString?.let { JSONObject(it) }
+                jsonObject ?: return
+
+                onSuccess(
+                    Movie(
+                        title = jsonObject.getString("Title"),
+                        storyLine = jsonObject.getString("Plot"),
+                        cast = jsonObject.getString("Actors")
+                    )
+                )
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // TODO
+            }
+        }
+        movieApi.searchMovie(movieRequest).enqueue(callback)
+    }
 }

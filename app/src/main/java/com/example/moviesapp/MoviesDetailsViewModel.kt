@@ -13,6 +13,8 @@ class MoviesDetailsViewModel: ViewModel() {
     private val _currentMovie = MutableLiveData<Movie>()
 
     init {
-        _currentMovie.value = movieRepository.getMovie()
+        movieRepository.getMovie("Avengers Endgame") {
+            _currentMovie.value = it
+        }
     }
 }

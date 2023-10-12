@@ -132,6 +132,22 @@
             app:layout_constraintTop_toBottomOf="@id/storyline_text"
             app:layout_goneMarginStart="16dp" />
 
+        <TextView
+            android:id="@+id/cast_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:text="@string/cast"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cast"
+            app:layout_goneMarginStart="16dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

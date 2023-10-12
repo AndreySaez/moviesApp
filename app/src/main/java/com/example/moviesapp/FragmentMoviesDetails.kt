@@ -23,12 +23,14 @@ class FragmentMoviesDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val nameText = view.findViewById<TextView>(R.id.name)
         val storylineText = view.findViewById<TextView>(R.id.storyline_text)
+        val cast = view.findViewById<TextView>(R.id.cast_value)
 
 
         viewModel.currentMovie.observe(viewLifecycleOwner) { movie ->
             movie ?: return@observe
             nameText.text = movie.title
             storylineText.text = movie.storyLine
+            cast.text = movie.cast
         }
     }
 }
