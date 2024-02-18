@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="322dp"
+    android:background="#191926"
+    tools:context=".FragmentMoviesList">
+
+    <ImageView
+        android:id="@+id/fon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="256dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/avengers_end_game"
+        android:textColor="#ECECEC"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/fon"
+        app:layout_constraintTop_toTopOf="@id/fon" />
+
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/_137_min"
+        android:textColor="#565665"
+        android:textSize="9sp"
+        app:layout_constraintStart_toStartOf="@id/fon"
+        app:layout_constraintTop_toBottomOf="@id/title_list" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/movie_card"
+        android:layout_width="166dp"
+        android:layout_height="248dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="26dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/movie_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avengers_list"
+            app:layout_constraintEnd_toEndOf="@id/movie_card"
+            app:layout_constraintStart_toStartOf="@id/movie_card"
+            app:layout_constraintTop_toTopOf="@id/movie_card" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mask_list"
+            app:layout_constraintEnd_toEndOf="@id/movie_card"
+            app:layout_constraintStart_toStartOf="@id/movie_card"
+            app:layout_constraintTop_toTopOf="@id/movie_card" />
+
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="146dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="214dp"
+            android:text="@string/action_adventure_drama"
+            android:textColor="@color/genre_color"
+            android:textSize="8sp"
+            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image" />
+
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/like_white"
+            app:layout_constraintEnd_toEndOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image" />
+
+        <TextView
+            android:id="@+id/age_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rectangle"
+            android:gravity="center"
+            android:text="@string/_13"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/reviews_list"
+            android:layout_width="107dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/reviews_avengers"
+            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/genre" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
