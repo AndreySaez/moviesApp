@@ -1,6 +1,6 @@
 package com.example.moviesapp.repository
 
-import com.example.moviesapp.model.Movie
+import com.example.moviesapp.model.MovieDetails
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -10,7 +10,7 @@ import retrofit2.Response
 class MovieRepository {
     private val movieApi = RetrofitProvider.api
 
-    fun getMovie(movieRequest: String, onSuccess: (Movie) -> Unit) {
+    fun getMovie(movieRequest: String, onSuccess: (MovieDetails) -> Unit) {
         val callback = object : Callback<ResponseBody> {
             override fun onResponse(
                 call: Call<ResponseBody>,
@@ -21,7 +21,7 @@ class MovieRepository {
                 jsonObject ?: return
 
                 onSuccess(
-                    Movie(
+                    MovieDetails(
                         title = jsonObject.getString("Title"),
                         storyLine = jsonObject.getString("Plot"),
                         cast = jsonObject.getString("Actors")
