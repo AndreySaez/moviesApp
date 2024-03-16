@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.movielist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviesapp.model.Movie
+import com.example.moviesapp.R
+import com.example.moviesapp.data.Movie
 
-class MovieListAdapter : RecyclerView.Adapter<ListViewHolder>() {
+class MovieListAdapter(
+    private val clickListener: ClickListener
+) : RecyclerView.Adapter<ListViewHolder>() {
 
     private var movieList = listOf<Movie>()
 
@@ -37,8 +40,14 @@ class MovieListAdapter : RecyclerView.Adapter<ListViewHolder>() {
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         when (holder) {
-            is MovieListHolder -> holder.getMovieData(getItem(position))
+            is MovieListHolder -> {
+                holder.bindMovieData(getItem(position))
+                holder.itemView.setOnClickListener {
+                    clickListener.onCLick(getItem(position))
+                }
+            }
             is HeaderViewHolder -> holder.itemView
+
         }
     }
 
@@ -64,7 +73,7 @@ class MovieListHolder(movie: View) : ListViewHolder(movie) {
     private val age = movie.findViewById<TextView>(R.id.age_tv)
     private val min = movie.findViewById<TextView>(R.id.min)
 
-    fun getMovieData(movie: Movie) {
+    fun bindMovieData(movie: Movie) {
         image?.setImageResource(movie.image)
         reviews?.setImageResource(movie.reviews)
         title?.text = movie.title

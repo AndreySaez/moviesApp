@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import com.example.moviesapp.R
 
 class FragmentMoviesDetails : Fragment() {
 
-    private val viewModel by viewModels<MoviesDetailsViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,14 +22,6 @@ class FragmentMoviesDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val nameText = view.findViewById<TextView>(R.id.name)
         val storylineText = view.findViewById<TextView>(R.id.storyline_text)
-        val cast = view.findViewById<TextView>(R.id.cast_value)
-
-
-        viewModel.currentMovie.observe(viewLifecycleOwner) { movie ->
-            movie ?: return@observe
-            nameText.text = movie.title
-            storylineText.text = movie.storyLine
-            cast.text = movie.cast
-        }
+        val cast = view.findViewById<TextView>(R.id.actor_name)
     }
 }
