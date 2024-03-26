@@ -1,12 +1,18 @@
 package com.example.moviesapp.data
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Movie(
-    val id:Int,
+    val id: Int,
     val image: Int,
     val reviews: Int,
-    val title: String,
+    val name: String?,
     val like: Int,
-    val genre: String,
-    val age: String,
-    val min: String,
-)
+    val genres: List<GenreDto>?,
+    val ageRating: Int,
+    val movieLength: Int?,
+    val description: String?,
+    val poster: PosterDto?,
+) : Parcelable

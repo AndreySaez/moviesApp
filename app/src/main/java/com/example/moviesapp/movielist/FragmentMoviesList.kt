@@ -1,6 +1,7 @@
 package com.example.moviesapp.movielist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.MovieListDataSource
+import com.example.moviesapp.data.Movie
+import com.example.moviesapp.data.MovieResponse
 import com.example.moviesapp.moviedetails.FragmentMoviesDetails
+import com.example.moviesapp.repository.ApiInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FragmentMoviesList : Fragment() {
 
@@ -26,9 +32,11 @@ class FragmentMoviesList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycler = view.findViewById(R.id.rc_view)
         val adapter = MovieListAdapter {
-            FragmentMoviesDetails().arguments = bundleOf("key" to it)
+            val details = FragmentMoviesDetails().apply {
+                arguments = bundleOf("Movie" to it)
+            }
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, FragmentMoviesDetails())
+                .add(R.id.fragment_container, details)
                 .addToBackStack(null)
                 .commit()
         }
@@ -43,6 +51,17 @@ class FragmentMoviesList : Fragment() {
                 }
             }
         }
+        val apiInterface = ApiInterface.create()
+        apiInterface.getMovies().enqueue( object : Callback<MovieResponse> {
+
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                response.body()?.docs?.let { adapter.bindMovie(it) }
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                Log.d("testLog","onFailure${t.message}")
+            }
+        })
     }
 
     override fun onStart() {
@@ -52,7 +71,6 @@ class FragmentMoviesList : Fragment() {
 
     private fun updateData() {
         (recycler?.adapter as? MovieListAdapter)?.apply {
-            bindActors(MovieListDataSource().getMovieData())
         }
     }
 

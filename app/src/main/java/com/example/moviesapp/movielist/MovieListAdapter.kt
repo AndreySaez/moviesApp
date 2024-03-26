@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.moviesapp.R
 import com.example.moviesapp.data.Movie
 
@@ -54,9 +55,10 @@ class MovieListAdapter(
     override fun getItemCount() = movieList.size + 1
     private fun getItem(position: Int): Movie = movieList[position - 1]
 
-    fun bindActors(newMovie: List<Movie>) {
+    fun bindMovie(newMovie: List<Movie>) {
         movieList = newMovie
         notifyDataSetChanged()
+
     }
 }
 
@@ -74,13 +76,13 @@ class MovieListHolder(movie: View) : ListViewHolder(movie) {
     private val min = movie.findViewById<TextView>(R.id.min)
 
     fun bindMovieData(movie: Movie) {
-        image?.setImageResource(movie.image)
-        reviews?.setImageResource(movie.reviews)
-        title?.text = movie.title
+        image.load(movie.poster?.previewUrl)
+        reviews.setImageResource(movie.reviews)
+        title.text = movie.name
         like.setImageResource(movie.like)
-        genre?.text = movie.genre
-        age?.text = movie.age
-        min?.text = movie.min
+        genre.text = movie.genres?.firstOrNull()?.name
+        age.text = movie.ageRating.toString()
+        min.text = movie.movieLength.toString()
     }
 
 }
