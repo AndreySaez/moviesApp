@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.movielist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviesapp.model.Movie
+import coil.load
+import com.example.moviesapp.R
+import com.example.moviesapp.data.Movie
 
-class MovieListAdapter : RecyclerView.Adapter<ListViewHolder>() {
+class MovieListAdapter(
+    private val clickListener: ClickListener
+) : RecyclerView.Adapter<ListViewHolder>() {
 
     private var movieList = listOf<Movie>()
 
@@ -37,17 +41,24 @@ class MovieListAdapter : RecyclerView.Adapter<ListViewHolder>() {
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         when (holder) {
-            is MovieListHolder -> holder.getMovieData(getItem(position))
+            is MovieListHolder -> {
+                holder.bindMovieData(getItem(position))
+                holder.itemView.setOnClickListener {
+                    clickListener.onCLick(getItem(position))
+                }
+            }
             is HeaderViewHolder -> holder.itemView
+
         }
     }
 
     override fun getItemCount() = movieList.size + 1
     private fun getItem(position: Int): Movie = movieList[position - 1]
 
-    fun bindActors(newMovie: List<Movie>) {
+    fun bindMovie(newMovie: List<Movie>) {
         movieList = newMovie
         notifyDataSetChanged()
+
     }
 }
 
@@ -64,14 +75,14 @@ class MovieListHolder(movie: View) : ListViewHolder(movie) {
     private val age = movie.findViewById<TextView>(R.id.age_tv)
     private val min = movie.findViewById<TextView>(R.id.min)
 
-    fun getMovieData(movie: Movie) {
-        image?.setImageResource(movie.image)
-        reviews?.setImageResource(movie.reviews)
-        title?.text = movie.title
+    fun bindMovieData(movie: Movie) {
+        image.load(movie.poster?.previewUrl)
+        reviews.setImageResource(movie.reviews)
+        title.text = movie.name
         like.setImageResource(movie.like)
-        genre?.text = movie.genre
-        age?.text = movie.age
-        min?.text = movie.min
+        genre.text = movie.genres?.firstOrNull()?.name
+        age.text = movie.ageRating.toString()
+        min.text = movie.movieLength.toString()
     }
 
 }
