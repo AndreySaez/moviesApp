@@ -12,9 +12,9 @@ interface ApiInterface {
 
     @GET("movie")
     @Headers("X-API-KEY: 4Y1K8K4-KWGMA79-P4Y7337-0GGC8CP")
-    fun getMovies(
+    suspend fun getMovies(
         @Query("page") page: Int = 1,
-        @Query("limit") limit: Int = 10,
+        @Query("limit") limit: Int = 20,
         @Query("selectFields") fields: List<String> = listOf(
             "name",
             "description",
@@ -24,7 +24,7 @@ interface ApiInterface {
             "genres",
             "poster"
         ),
-    ): Call<MovieResponse>
+    ): MovieResponse
 
 
     companion object {

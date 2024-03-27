@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
@@ -14,6 +15,9 @@ import com.example.moviesapp.data.Movie
 import com.example.moviesapp.data.MovieResponse
 import com.example.moviesapp.moviedetails.FragmentMoviesDetails
 import com.example.moviesapp.repository.ApiInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,16 +56,16 @@ class FragmentMoviesList : Fragment() {
             }
         }
         val apiInterface = ApiInterface.create()
-        apiInterface.getMovies().enqueue( object : Callback<MovieResponse> {
-
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                response.body()?.docs?.let { adapter.bindMovie(it) }
+        lifecycleScope.launch(Dispatchers.IO) {
+            apiInterface.getMovies().let { response ->
+                response.docs.let {
+                    withContext(Dispatchers.Main) {
+                        adapter.bindMovie(it)
+                    }
+                }
             }
-
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                Log.d("testLog","onFailure${t.message}")
-            }
-        })
+        }
+        Log.e("A", "A")
     }
 
     override fun onStart() {
