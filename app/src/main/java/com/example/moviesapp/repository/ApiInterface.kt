@@ -22,13 +22,14 @@ interface ApiInterface {
             "ageRating",
             "movieLength",
             "genres",
-            "poster"
+            "poster",
+            "persons"
         ),
     ): MovieResponse
 
 
     companion object {
-        private const val BASE_URL = " https://api.kinopoisk.dev/v1.4/"
+        private const val BASE_URL = "https://api.kinopoisk.dev/v1.4/"
         fun create(): ApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

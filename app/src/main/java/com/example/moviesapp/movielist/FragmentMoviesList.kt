@@ -65,7 +65,6 @@ class FragmentMoviesList : Fragment() {
                 }
             }
         }
-        Log.e("A", "A")
     }
 
     override fun onStart() {

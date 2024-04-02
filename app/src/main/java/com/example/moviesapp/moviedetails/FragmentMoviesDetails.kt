@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ImageView.ScaleType
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.size.Scale
-import coil.transform.CircleCropTransformation
 import com.example.moviesapp.R
 import com.example.moviesapp.data.Movie
 
 class FragmentMoviesDetails : Fragment() {
 
+    private var recycler: RecyclerView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,14 +25,22 @@ class FragmentMoviesDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recycler = view.findViewById(R.id.rv_actors)
+        val adapter = MovieDetailsAdapter()
         val args = this.arguments
         val movieData = args?.getParcelable("Movie") as? Movie
+        recycler?.adapter = adapter
+        recycler?.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
         movieData?.let {
-            bindMovie(it, view)
+            bindData(it, view)
+            adapter.setPerson(it.persons)
         }
+
     }
 
-    private fun bindMovie(movieData: Movie, view: View) {
+
+
+    private fun bindData(movieData: Movie, view: View) {
         view.findViewById<TextView>(R.id.name).apply {
             text = movieData.name
         }
@@ -46,7 +54,6 @@ class FragmentMoviesDetails : Fragment() {
             crossfade(750)
 
         }
-
         view.findViewById<TextView>(R.id.age).apply {
             text = movieData.ageRating.toString()
         }
