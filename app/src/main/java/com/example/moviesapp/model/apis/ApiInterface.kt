@@ -1,7 +1,6 @@
-package com.example.moviesapp.repository
+package com.example.moviesapp.model.apis
 
 import com.example.moviesapp.data.MovieResponse
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

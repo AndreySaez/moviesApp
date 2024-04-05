@@ -1,4 +1,4 @@
-package com.example.moviesapp.moviedetails
+package com.example.moviesapp.view.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,11 +52,9 @@ class FragmentMoviesDetails : Fragment() {
         }
         view.findViewById<ImageView>(R.id.movie_details_poster).load(movieData.poster?.url) {
             crossfade(750)
-
         }
         view.findViewById<TextView>(R.id.age).apply {
             text = movieData.ageRating.toString()
         }
     }
-
 }

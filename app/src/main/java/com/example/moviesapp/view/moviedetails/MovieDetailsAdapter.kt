@@ -1,4 +1,4 @@
-package com.example.moviesapp.moviedetails
+package com.example.moviesapp.view.moviedetails
 
 import android.view.LayoutInflater
 import android.view.View
