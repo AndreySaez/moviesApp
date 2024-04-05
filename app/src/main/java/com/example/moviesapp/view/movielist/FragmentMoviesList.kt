@@ -1,7 +1,6 @@
-package com.example.moviesapp.movielist
+package com.example.moviesapp.view.movielist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
-import com.example.moviesapp.data.Movie
-import com.example.moviesapp.data.MovieResponse
-import com.example.moviesapp.moviedetails.FragmentMoviesDetails
-import com.example.moviesapp.repository.ApiInterface
+import com.example.moviesapp.view.moviedetails.FragmentMoviesDetails
+import com.example.moviesapp.model.apis.ApiInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class FragmentMoviesList : Fragment() {
 
