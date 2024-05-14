@@ -13,7 +13,7 @@ interface ApiInterface {
     @Headers("X-API-KEY: 4Y1K8K4-KWGMA79-P4Y7337-0GGC8CP")
     suspend fun getMovies(
         @Query("page") page: Int = 1,
-        @Query("limit") limit: Int = 20,
+        @Query("limit") limit: Int = 40,
         @Query("selectFields") fields: List<String> = listOf(
             "name",
             "description",
@@ -25,7 +25,6 @@ interface ApiInterface {
             "persons"
         ),
     ): MovieResponse
-
 
     companion object {
         private const val BASE_URL = "https://api.kinopoisk.dev/v1.4/"
