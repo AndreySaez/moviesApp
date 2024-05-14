@@ -6,19 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
 import com.example.moviesapp.view.moviedetails.FragmentMoviesDetails
-import com.example.moviesapp.model.apis.ApiInterface
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.moviesapp.viewModel.MoviesViewModel
 
 class FragmentMoviesList : Fragment() {
 
     private var recycler: RecyclerView? = null
+    private val viewModel by viewModels<MoviesViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,15 +47,9 @@ class FragmentMoviesList : Fragment() {
                 }
             }
         }
-        val apiInterface = ApiInterface.create()
-        lifecycleScope.launch(Dispatchers.IO) {
-            apiInterface.getMovies().let { response ->
-                response.docs.let {
-                    withContext(Dispatchers.Main) {
-                        adapter.bindMovie(it)
-                    }
-                }
-            }
+        viewModel.movieList.observe(viewLifecycleOwner){
+            it ?: return@observe
+            adapter.bindMovie(it)
         }
     }
 
