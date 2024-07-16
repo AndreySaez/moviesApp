@@ -2,7 +2,7 @@ package com.example.moviesapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.moviesapp.view.movielist.FragmentMoviesList
+import com.example.moviesapp.presentation.view.movielist.FragmentMoviesList
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

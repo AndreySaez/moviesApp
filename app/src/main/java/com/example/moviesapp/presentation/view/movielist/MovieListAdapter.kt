@@ -1,4 +1,4 @@
-package com.example.moviesapp.view.movielist
+package com.example.moviesapp.presentation.view.movielist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.moviesapp.R
-import com.example.moviesapp.data.Movie
+import com.example.moviesapp.domain.Movie
 
 class MovieListAdapter(
     private val clickListener: ClickListener

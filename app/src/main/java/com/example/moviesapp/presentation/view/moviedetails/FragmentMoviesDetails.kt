@@ -1,4 +1,4 @@
-package com.example.moviesapp.view.moviedetails
+package com.example.moviesapp.presentation.view.moviedetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.moviesapp.R
-import com.example.moviesapp.data.Movie
+import com.example.moviesapp.domain.Movie
 
 class FragmentMoviesDetails : Fragment() {
 

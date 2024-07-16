@@ -1,4 +1,4 @@
-package com.example.moviesapp.view.movielist
+package com.example.moviesapp.presentation.view.movielist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.R
-import com.example.moviesapp.view.moviedetails.FragmentMoviesDetails
-import com.example.moviesapp.viewModel.MoviesViewModel
+import com.example.moviesapp.presentation.view.moviedetails.FragmentMoviesDetails
+import com.example.moviesapp.presentation.viewModel.MoviesViewModel
 
 class FragmentMoviesList : Fragment() {
 

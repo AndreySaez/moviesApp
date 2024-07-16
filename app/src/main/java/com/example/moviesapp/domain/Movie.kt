@@ -1,6 +1,9 @@
-package com.example.moviesapp.data
+package com.example.moviesapp.domain
 
 import android.os.Parcelable
+import com.example.moviesapp.data.apis.GenreDto
+import com.example.moviesapp.data.apis.PersonDto
+import com.example.moviesapp.data.apis.PosterDto
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

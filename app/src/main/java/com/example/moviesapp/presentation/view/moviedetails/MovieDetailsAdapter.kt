@@ -1,4 +1,4 @@
-package com.example.moviesapp.view.moviedetails
+package com.example.moviesapp.presentation.view.moviedetails
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.moviesapp.R
-import com.example.moviesapp.data.PersonDto
+import com.example.moviesapp.data.apis.PersonDto
 
 class MovieDetailsAdapter : RecyclerView.Adapter<ActorHolder>() {
 
